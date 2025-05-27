@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador en Tiempo Real - Conflicto Israel/Palestina</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      color: #a71d2a;
+    }
+    .counter {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contador en Tiempo Real – Conflicto Israel/Palestina (2025)</h1>
+  <div class="counter"><span class="label">Fallecidos:</span> <span id="deaths">55200</span></div>
+  <div class="counter"><span class="label">Heridos:</span> <span id="injured">121000</span></div>
+  <div class="counter"><span class="label">Desplazados/Refugiados:</span> <span id="displaced">5400000</span></div>
+  <div class="counter"><span class="label">Niños afectados:</span> <span id="children">18000</span></div>
+  <div class="counter"><span class="label">% población desplazada en Gaza:</span> <span id="percent">90%</span></div>
+
+  <script>
+    const rates = {
+      deaths: 0.00005,
+      injured: 0.0002,
+      displaced: 0.001,
+      children: 0.00002
+    };
+
+    const startTime = new Date("2025-05-01T00:00:00Z").getTime();
+    const now = new Date().getTime();
+    const elapsedSeconds = (now - startTime) / 1000;
+
+    const base = {
+      deaths: 53475,
+      injured: 121000,
+      displaced: 5400000,
+      children: 17400
+    };
+
+    function updateCounts() {
+      document.getElementById("deaths").innerText = Math.floor(base.deaths + elapsedSeconds * rates.deaths);
+      document.getElementById("injured").innerText = Math.floor(base.injured + elapsedSeconds * rates.injured);
+      document.getElementById("displaced").innerText = Math.floor(base.displaced + elapsedSeconds * rates.displaced);
+      document.getElementById("children").innerText = Math.floor(base.children + elapsedSeconds * rates.children);
+    }
+
+    updateCounts();
+    setInterval(updateCounts, 5000);
+  </script>
+</body>
+</html>
